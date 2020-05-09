@@ -1,0 +1,9 @@
+.wrapper {
+    display: grid;
+    justify-content: center;
+}
+
+.image {
+    width: 300px;
+    height: 300px;
+}

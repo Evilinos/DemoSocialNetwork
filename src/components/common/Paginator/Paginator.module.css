@@ -1,0 +1,21 @@
+.selectedPage {
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.paggination {
+    display: flex;
+    justify-content: center;
+}
+.paggination span {
+    margin-right: 2.5px;
+    margin-left: 2.5px;
+    cursor: pointer;
+}
+
+.paggination button {
+    margin-right: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
