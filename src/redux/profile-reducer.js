@@ -4,6 +4,7 @@ const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profile/SET_USER_STATUS';
 const DELETE_POST = 'profile/DELETE_POST';
+const UPDATE_PHOTO_SUCCESS = 'profile/UPDATE_PHOTO_SUCCESS';
 
 
 let initialState = {
@@ -31,6 +32,8 @@ const profileReducer = (state = initialState, action) => {
             return {...state, status: action.status}
         case DELETE_POST:
             return {...state, posts: state.posts.filter(p => p.id != action.postId)}
+        case UPDATE_PHOTO_SUCCESS:
+            return {...state, profile: {...state.profile, photos: action.photos }}
         default:
             return state
     }
@@ -41,6 +44,7 @@ export const addPost = (newPostText) => ({type: ADD_POST, newPostText})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status})
 export const deletePost = (postId) => ({type: DELETE_POST, postId})
+export const updatePhotoSuccess = (photos) => ({type: UPDATE_PHOTO_SUCCESS, photos})
 
 // Thunks
 export const getUserProfile = (id) => async (dispatch) => {
@@ -55,6 +59,12 @@ export const updateUserStatus = (status) => async (dispatch) => {
     let response = await profileAPI.updateStatus(status)
     if (response.resultCode === 0)
         dispatch(setUserStatus(status))
+}
+
+export const updatePhoto = (file) => async (dispatch) => {
+    let response = await profileAPI.updatePhoto(file)
+    if (response.resultCode === 0)
+        dispatch(updatePhotoSuccess(response.data.photos))
 }
 
 export default profileReducer
