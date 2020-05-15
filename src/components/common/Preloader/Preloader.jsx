@@ -5,7 +5,7 @@ import styles from './Preloader.module.css'
 const Preloader = (props) => {
     return (
         <div className={styles.wrapper}>
-            <img className={styles.image} src={preloader}/>
+            <img alt='Loading...' className={styles.image} src={preloader}/>
         </div>
     )
 }

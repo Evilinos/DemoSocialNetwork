@@ -1,45 +1,68 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from './ProfileInfo.module.css'
 import profileBackground from '../../../assets/images/profileBackground.jpg'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.jpg";
+import ProfileDataEdit from "./ProfileDataEdit";
 
 const ProfileInfo = (props) => {
 
-    const onMainPhotoSelected = (e) => {
-        if (e.target.files.length) {
-            props.updatePhoto(e.target.files[0])
-        }
+    let [editMode, setEditMode] = useState(false)
+
+    const onSubmit = (formData) => {
+        props.saveProfile(formData)
+        setEditMode(false)
     }
 
-    return (
-        <div className={styles.wrapper}>
-            <img className={styles.profileBackground} src={profileBackground}/>
-            <div className={styles.descriptionBlock}>
-                <img src={props.profile.photos.large || userPhoto}/>
-                <div className={styles.description}>
-                    <div className={styles.descriptionItem}>Full name: {props.profile.fullName}</div>
-                    <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
-                    <div className={styles.descriptionItem}>About: {props.profile.aboutMe}</div>
-                    <div className={styles.descriptionItem}>Contacts:
-                        <ul>
-                            <li>facebook: {props.profile.contacts.facebook}</li>
-                            <li>website: {props.profile.contacts.website}</li>
-                            <li>vk: {props.profile.contacts.vk}</li>
-                            <li>twitter: {props.profile.contacts.twitter}</li>
-                            <li>instagram: {props.profile.contacts.instagram}</li>
-                            <li>youtube: {props.profile.contacts.youtube}</li>
-                            <li>github: {props.profile.contacts.github}</li>
-                            <li>mainLink: {props.profile.contacts.mainLink}</li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    {props.isOwner && <input type='file' onChange={onMainPhotoSelected}/>}
-                </div>
-            </div>
-        </div>)
 
+    return <div className={styles.wrapper}>
+        <img alt='Background' className={styles.profileBackground} src={profileBackground}/>
+
+        {editMode
+            ? <ProfileDataEdit {...props} initialValues={props.profile} onSubmit={onSubmit} exitEditMode={() => {setEditMode(false)}}/>
+            : <ProfileData {...props} toEditMode={() => {setEditMode(true)}}/>}
+
+    </div>
+
+}
+
+const ProfileData = props => {
+    return <div className={styles.descriptionBlock}>
+        <img alt='Avatar' src={props.profile.photos.large || userPhoto}/>
+        <div className={styles.description}>
+            <div className={styles.descriptionItem}>Full name: {props.profile.fullName}</div>
+            <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
+            <LookingForAJob lookingForAJob={props.profile.lookingForAJob}
+                            lookingForAJobDescription={props.profile.lookingForAJobDescription}/>
+            <div className={styles.descriptionItem}>About: {props.profile.aboutMe}</div>
+            <Contacts contacts={props.profile.contacts}/>
+            {props.isOwner && <div>
+                <button onClick={props.toEditMode}>Edit</button>
+            </div>}
+        </div>
+    </div>
+}
+
+const LookingForAJob = (props) => {
+    return <>
+        <div className={styles.descriptionItem}>Looking for a
+            job: {props.lookingForAJob ? 'yes' : 'no'}</div>
+
+        {props.lookingForAJob &&
+        <div className={styles.descriptionItem}>Job
+            description: {props.lookingForAJobDescription}</div>}
+    </>
+}
+
+const Contacts = (props) => {
+    return <div className={styles.descriptionItem}>
+        Contacts:
+        <ul>
+            {Object.keys(props.contacts).map(key => {
+                return <li key={key}>{key + ': ' + props.contacts[key]}</li>
+            })}
+        </ul>
+    </div>
 }
 
 export default ProfileInfo
