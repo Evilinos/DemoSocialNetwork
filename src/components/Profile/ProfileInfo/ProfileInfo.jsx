@@ -5,13 +5,14 @@ import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.jpg";
 import ProfileDataEdit from "./ProfileDataEdit";
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({saveProfile, ...props}) => {
 
     let [editMode, setEditMode] = useState(false)
 
     const onSubmit = (formData) => {
-        props.saveProfile(formData)
-        setEditMode(false)
+        saveProfile(formData).then(() => {
+            setEditMode(false)
+        })
     }
 
 

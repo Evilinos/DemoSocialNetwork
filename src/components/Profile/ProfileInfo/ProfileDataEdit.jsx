@@ -2,6 +2,7 @@ import styles from "./ProfileInfo.module.css";
 import React from "react";
 import userPhoto from "../../../assets/images/user.jpg";
 import {Field, reduxForm} from "redux-form";
+import s from '../../common/FormsControls/FormsControls.module.css'
 
 let ProfileDataEdit = props => {
 
@@ -12,9 +13,6 @@ let ProfileDataEdit = props => {
                 <div className={styles.descriptionItem}>Full name :
                     <Field component='input' type='text' name='fullName'/>
                 </div>
-                {/*<div className={styles.descriptionItem}>Status :*/}
-                {/*    <Field component='input' type='text' name='status'/>*/}
-                {/*</div>*/}
                 <div className={styles.descriptionItem}>Looking For A job :
                     <Field component='select' name='lookingForAJob'>
                         <option value='true'>Yes</option>
@@ -29,19 +27,15 @@ let ProfileDataEdit = props => {
                 </div>
                 <div className={styles.descriptionItem}>
                     Contacts:
-                    <ul>
-                        <li key={1}>Facebook: <Field component='input' type='text' name='facebook'/></li>
-                        <li key={2}>website: <Field component='input' type='text' name='website'/></li>
-                        <li key={3}>vk: <Field component='input' type='text' name='vk'/></li>
-                        <li key={4}>twitter: <Field component='input' type='text' name='twitter'/></li>
-                        <li key={5}>instagram: <Field component='input' type='text' name='instagram'/></li>
-                        <li key={6}>youtube: <Field component='input' type='text' name='youtube'/></li>
-                        <li key={7}>github: <Field component='input' type='text' name='github'/></li>
-                        <li key={8}>mainLink: <Field component='input' type='text' name='mainLink'/></li>
-                    </ul>
+                    {Object.keys(props.profile.contacts).map(key => {
+                        return <div key={key}>
+                            {key + ": "}<Field component='input' type='text' name={`contacts.${key}`}/>
+                        </div>
+                    })}
                 </div>
+                {props.error && <div className={s.error}>{props.error}</div>}
                 <button>Save</button>
-                <button onClick={props.reset}>Back</button>
+                <button onClick={props.exitEditMode}>Back</button>
             </form>
         </div>
 
