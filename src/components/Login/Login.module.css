@@ -1,0 +1,18 @@
+.wrapper {
+    margin-bottom: 25px;
+    margin-left: 25px;
+    position: relative;
+}
+.wrapper input {
+    margin-bottom: 10px;
+}
+.wrapper button {
+    font-size: 16px;
+}
+
+.preloader {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 185px;
+}
