@@ -3,6 +3,7 @@ import React from "react";
 import userPhoto from "../../../../assets/images/user.jpg";
 import {Field, reduxForm} from "redux-form";
 import s from '../../../common/FormsControls/FormsControls.module.css'
+import Preloader from "../../../common/Preloader/Preloader";
 
 let ProfileEditMode = props => {
 
@@ -37,6 +38,7 @@ let ProfileEditMode = props => {
                 <button>Save</button>
                 <button onClick={props.exitEditMode}>Back</button>
             </form>
+            {props.isPending && !props.error && <Preloader styles={styles.preloaderProfile}/>}
         </div>
 
         <ButtonUpdateAvatar updatePhoto={props.updatePhoto} isOwner={props.isOwner}/>

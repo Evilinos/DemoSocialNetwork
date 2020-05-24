@@ -11,11 +11,11 @@ const Profile = (props) => {
 
     }
     return (
-        <div>
+        <>
             <ProfileInfo profile={props.profile} isOwner={props.isOwner} updatePhoto={props.updatePhoto}
                          status={props.status} updateUserStatus={props.updateUserStatus} saveProfile={props.saveProfile}/>
             <MyPostsContainer />
-        </div>)
+        </>)
 
 }
 

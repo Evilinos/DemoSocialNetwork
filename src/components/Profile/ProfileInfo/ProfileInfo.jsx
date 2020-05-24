@@ -8,11 +8,14 @@ import ProfileEditMode from "./ProfileEditMode/ProfileEditMode";
 const ProfileInfo = ({saveProfile, ...props}) => {
 
     let [editMode, setEditMode] = useState(false)
+    let [pending, setPending] = useState(false)
 
     const onSubmit = (formData) => {
-        saveProfile(formData).then(() => {
-            setEditMode(false)
-        })
+        setPending(true)
+            saveProfile(formData).then(() => {
+                setPending(false)
+                setEditMode(false)
+            })
     }
 
 
@@ -20,8 +23,13 @@ const ProfileInfo = ({saveProfile, ...props}) => {
         <img alt='Background' className={styles.profileBackground} src={profileBackground}/>
 
         {editMode
-            ? <ProfileEditMode {...props} initialValues={props.profile} onSubmit={onSubmit} exitEditMode={() => {setEditMode(false)}}/>
-            : <ProfileData {...props} toEditMode={() => {setEditMode(true)}}/>}
+            ? <ProfileEditMode {...props} isPending={pending} initialValues={props.profile} onSubmit={onSubmit}
+                               exitEditMode={() => {
+                                   setEditMode(false)
+                               }}/>
+            : <ProfileData {...props} toEditMode={() => {
+                setEditMode(true)
+            }}/>}
 
     </div>
 

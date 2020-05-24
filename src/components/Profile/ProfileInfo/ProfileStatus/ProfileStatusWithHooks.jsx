@@ -26,7 +26,7 @@ const ProfileStatusWithHooks = (props) => {
     }
 
     return <div className={styles.descriptionItem}>
-        {isPending && <Preloader styles={styles.preloader}/>}
+        {isPending && <Preloader styles={styles.preloaderStatus}/>}
         {!editMode &&
         <div>
             <span onDoubleClick={activateMode}>{props.status || '-----'}</span>

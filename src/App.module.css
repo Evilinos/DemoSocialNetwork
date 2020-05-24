@@ -18,7 +18,8 @@
 }
 
 .requestError {
-  background: rgba(255, 0, 0, 0.8);
+  z-index: 10;
+  background: rgba(170, 0, 0, 0.85);
   text-align: right;
   position: absolute;
   left: 600px;

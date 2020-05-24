@@ -14,7 +14,9 @@ const Login = React.lazy(() => import("./components/Login/Login"))
 
 class App extends React.Component {
     catchAllUnhandledErrors = (promiseRejectionEvent) => {
-        this.props.requestError(promiseRejectionEvent.reason.message)
+        if (promiseRejectionEvent.reason) {
+            this.props.requestError(promiseRejectionEvent.reason.message)
+        }
     }
 
     componentDidMount() {
