@@ -1,10 +1,10 @@
-import styles from "./ProfileInfo.module.css";
+import styles from "../ProfileInfo.module.css";
 import React from "react";
-import userPhoto from "../../../assets/images/user.jpg";
+import userPhoto from "../../../../assets/images/user.jpg";
 import {Field, reduxForm} from "redux-form";
-import s from '../../common/FormsControls/FormsControls.module.css'
+import s from '../../../common/FormsControls/FormsControls.module.css'
 
-let ProfileDataEdit = props => {
+let ProfileEditMode = props => {
 
     return <div className={styles.descriptionBlock}>
         <img alt='Avatar' src={props.profile.photos.large || userPhoto}/>
@@ -54,8 +54,8 @@ export const ButtonUpdateAvatar = (props) => {
     </>
 }
 
-ProfileDataEdit = reduxForm({
+ProfileEditMode = reduxForm({
     form: 'edit_profile',
-})(ProfileDataEdit)
+})(ProfileEditMode)
 
-export default ProfileDataEdit
+export default ProfileEditMode

@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import styles from './ProfileInfo.module.css'
+import styles from '../ProfileInfo.module.css'
+import Preloader from "../../../common/Preloader/Preloader";
 
 const ProfileStatusWithHooks = (props) => {
 
     let [editMode, setEditMode] = useState(false)
     let [status, setStatus] = useState(props.status)
+
+    let isPending = props.status !== status && editMode === false;
 
     useEffect(() => {
         setStatus(props.status)
@@ -23,6 +26,7 @@ const ProfileStatusWithHooks = (props) => {
     }
 
     return <div className={styles.descriptionItem}>
+        {isPending && <Preloader styles={styles.preloader}/>}
         {!editMode &&
         <div>
             <span onDoubleClick={activateMode}>{props.status || '-----'}</span>

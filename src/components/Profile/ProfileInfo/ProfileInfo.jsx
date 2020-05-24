@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import styles from './ProfileInfo.module.css'
 import profileBackground from '../../../assets/images/profileBackground.jpg'
-import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.jpg";
-import ProfileDataEdit from "./ProfileDataEdit";
+import ProfileEditMode from "./ProfileEditMode/ProfileEditMode";
 
 const ProfileInfo = ({saveProfile, ...props}) => {
 
@@ -20,7 +20,7 @@ const ProfileInfo = ({saveProfile, ...props}) => {
         <img alt='Background' className={styles.profileBackground} src={profileBackground}/>
 
         {editMode
-            ? <ProfileDataEdit {...props} initialValues={props.profile} onSubmit={onSubmit} exitEditMode={() => {setEditMode(false)}}/>
+            ? <ProfileEditMode {...props} initialValues={props.profile} onSubmit={onSubmit} exitEditMode={() => {setEditMode(false)}}/>
             : <ProfileData {...props} toEditMode={() => {setEditMode(true)}}/>}
 
     </div>

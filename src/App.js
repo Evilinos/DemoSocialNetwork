@@ -1,48 +1,67 @@
 import React, {Suspense} from 'react';
-import './App.css';
+import styles from './App.module.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
-import {Route} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import {connect} from "react-redux";
-import {initializeApp} from "./redux/app-reducer";
+import {initializeApp, requestError} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
-const UsersContainer = React.lazy (() => import('./components/Users/UsersContainer'))
-const ProfileContainer = React.lazy (() => import('./components/Profile/ProfileContainer'))
-const Login = React.lazy (() => import("./components/Login/Login"))
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const Login = React.lazy(() => import("./components/Login/Login"))
 
 class App extends React.Component {
+    catchAllUnhandledErrors = (promiseRejectionEvent) => {
+        this.props.requestError(promiseRejectionEvent.reason.message)
+    }
+
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+
+
 
     render() {
         if (!this.props.initialized) return <Preloader/>
 
-        return <div className='app-wrapper'>
+        return <div className={styles.appWrapper}>
             <HeaderContainer/>
             <Navbar/>
-            <div className='app-wrapper-content'>
+            <div className={styles.appWrapperContent}>
+                {this.props.error &&
+                <div className={styles.requestError}>
+                    <button onClick={() => this.props.requestError(null)}>X</button>
+                    <div>{this.props.error}</div>
+                </div>}
                 <Suspense fallback={<Preloader/>}>
-                    <Route path='/dialogs'
-                           render={() => <DialogsContainer/>}/>
-                    <Route path='/profile/:userId?'
-                           render={() => <ProfileContainer/>}/>
-                    <Route path='/users'
-                           render={() => <UsersContainer/>}/>
-                    <Route path='/login'
-                           render={() => <Login/>}/>
+                    <Switch>
+                        <Route path='/dialogs'
+                               render={() => <DialogsContainer/>}/>
+                        <Route path='/profile/:userId?'
+                               render={() => <ProfileContainer/>}/>
+                        <Route path='/users'
+                               render={() => <UsersContainer/>}/>
+                        <Route path='/login'
+                               render={() => <Login/>}/>
+                        <Redirect from="/" to="/profile" />
+                        <Route render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </Suspense>
-
-
             </div>
         </div>
     }
 }
 
 const mapStateToProps = (state) => ({
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
+    error: state.app.error
 })
 
-export default connect(mapStateToProps, ({initializeApp}))(App)
+export default connect(mapStateToProps, ({initializeApp, requestError}))(App)
