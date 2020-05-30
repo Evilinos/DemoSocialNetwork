@@ -3,8 +3,21 @@ import React from "react";
 import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
 import Preloader from "../common/Preloader/Preloader";
+import {UserType} from "../../types/types";
 
-const Users = (props) => {
+type PropsType = {
+    isFetching: boolean
+    totalUsersCount: number
+    pageSize: number
+    onPageChanged: (p: number) => void
+    currentPage: number
+    users: Array<UserType>
+    followingInProgress: Array<number>
+    follow: (id: number) => void
+    unfollow: (id: number) => void
+}
+
+const Users: React.FC<PropsType> = (props) => {
     return <>
         <h3 className={styles.title}>Users</h3>
             {props.isFetching ? <Preloader/> : null}
@@ -15,6 +28,6 @@ const Users = (props) => {
                                        followingInProgress={props.followingInProgress} />)
         }
     </>
-}
+};
 
-export default Users
+export default Users;
