@@ -70,7 +70,7 @@ export const getAuthUserData = () => async (dispatch: any) => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha?: string) => async (dispatch: any) => {
     dispatch(toggleIsFetching(true))
     let response = await authAPI.login(email, password, rememberMe, captcha)
     if (response.resultCode === 0) {

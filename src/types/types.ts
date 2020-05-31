@@ -3,7 +3,7 @@ export type PostType = {
     message: string
     likesCounts: number
 }
-export type ContactsType = {
+export type ProfileContactsType = {
     facebook: null | string
     website: null | string
     vk: null | string
@@ -19,7 +19,7 @@ export type PhotosType = {
 }
 export type ProfileType = {
     aboutMe: null | string,
-    contacts: ContactsType,
+    contacts: ProfileContactsType,
     lookingForAJob: null | boolean,
     lookingForAJobDescription: null | string,
     fullName: null | string,
@@ -34,4 +34,13 @@ export type UserType = {
     photos: PhotosType
     status: null | string
     followed: boolean
+}
+
+export type DialogType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    id: number
+    message: string
 }

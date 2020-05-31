@@ -1,9 +1,14 @@
 import React from "react";
 import styles from './FormsControls.module.css'
 
-export const Textarea = ({input, meta, ...props}) => {
+type TextareaPropsType = {
+    input: any
+    meta: any
+}
 
-    const hasError = meta.touched && meta.error
+export const Textarea: React.FC<TextareaPropsType> = ({input, meta, ...props}) => {
+
+    const hasError = meta.touched && meta.error;
     return <>
         <div className={styles.formControl + ' ' + (hasError ? styles.error : ' ')}>
             <div>
@@ -11,12 +16,17 @@ export const Textarea = ({input, meta, ...props}) => {
             </div>
             {hasError && <span>{meta.error}</span>}
         </div>
-        </>
+    </>
+};
+
+type InputPropsType = {
+    input: any
+    meta: any
 }
 
-export const Input = ({input, meta, ...props}) => {
+export const Input: React.FC<InputPropsType> = ({input, meta, ...props}) => {
 
-    const hasError = meta.touched && meta.error
+    const hasError = meta.touched && meta.error;
     return <>
         <div className={styles.formControl + ' ' + (hasError ? styles.error : ' ')}>
             <div>
@@ -25,4 +35,4 @@ export const Input = ({input, meta, ...props}) => {
             {hasError && <span>{meta.error}</span>}
         </div>
     </>
-}
+};

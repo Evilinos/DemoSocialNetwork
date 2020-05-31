@@ -4,25 +4,36 @@ import profileBackground from '../../../assets/images/profileBackground.jpg'
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.jpg";
 import ProfileEditMode from "./ProfileEditMode/ProfileEditMode";
+import {ProfileType} from "../../../types/types";
 
-const ProfileInfo = ({saveProfile, ...props}) => {
+type ProfileInfoPropsType = {
+    profile: ProfileType
+    isOwner: boolean
+    updatePhoto: (file: any) => void
+    status: string | null
+    updateUserStatus: (status: string | null) => void
+    saveProfile: (formData: any) => Promise<ProfileType>
+}
 
-    let [editMode, setEditMode] = useState(false)
-    let [pending, setPending] = useState(false)
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({saveProfile, ...props}) => {
 
-    const onSubmit = (formData) => {
-        setPending(true)
-            saveProfile(formData).then(() => {
-                setPending(false)
-                setEditMode(false)
-            })
-    }
+    let [editMode, setEditMode] = useState(false);
+    let [pending, setPending] = useState(false);
+
+    const onSubmit = (formData: any) => {
+        setPending(true);
+        saveProfile(formData).then(() => {
+            setPending(false);
+            setEditMode(false)
+        })
+    };
 
 
     return <div className={styles.wrapper}>
         <img alt='Background' className={styles.profileBackground} src={profileBackground}/>
 
         {editMode
+        /*@ts-ignore*/
             ? <ProfileEditMode {...props} isPending={pending} initialValues={props.profile} onSubmit={onSubmit}
                                exitEditMode={() => {
                                    setEditMode(false)
@@ -33,9 +44,17 @@ const ProfileInfo = ({saveProfile, ...props}) => {
 
     </div>
 
+};
+
+type ProfileDataPropsType = {
+    profile: ProfileType
+    status: string | null
+    updateUserStatus: (status: string | null) => void
+    isOwner: boolean
+    toEditMode: () => void
 }
 
-const ProfileData = props => {
+const ProfileData: React.FC<ProfileDataPropsType> = props => {
     return <div className={styles.descriptionBlock}>
         <img alt='Avatar' src={props.profile.photos.large || userPhoto}/>
         <div className={styles.description}>
@@ -50,9 +69,15 @@ const ProfileData = props => {
             </div>}
         </div>
     </div>
+};
+
+type LookingForAJobPropsType = {
+    lookingForAJob: boolean | null
+    lookingForAJobDescription: string | null
+
 }
 
-const LookingForAJob = (props) => {
+const LookingForAJob: React.FC<LookingForAJobPropsType> = (props) => {
     return <>
         <div className={styles.descriptionItem}>Looking for a
             job: {props.lookingForAJob ? 'yes' : 'no'}</div>
@@ -61,9 +86,13 @@ const LookingForAJob = (props) => {
         <div className={styles.descriptionItem}>Job
             description: {props.lookingForAJobDescription}</div>}
     </>
+};
+
+type ContactsPropsType = {
+    contacts: any
 }
 
-const Contacts = (props) => {
+const Contacts: React.FC<ContactsPropsType> = (props) => {
     return <div className={styles.descriptionItem}>
         Contacts:
         <ul>
@@ -72,6 +101,6 @@ const Contacts = (props) => {
             })}
         </ul>
     </div>
-}
+};
 
 export default ProfileInfo

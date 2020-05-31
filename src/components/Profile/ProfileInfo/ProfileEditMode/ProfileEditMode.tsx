@@ -4,8 +4,19 @@ import userPhoto from "../../../../assets/images/user.jpg";
 import {Field, reduxForm} from "redux-form";
 import s from '../../../common/FormsControls/FormsControls.module.css'
 import Preloader from "../../../common/Preloader/Preloader";
+import {ProfileType} from "../../../../types/types";
 
-let ProfileEditMode = props => {
+type PropsType = {
+    profile: ProfileType
+    handleSubmit: () => void
+    error: string | null
+    exitEditMode: () => void
+    isPending: boolean
+    isOwner: boolean
+    updatePhoto: (file: any) => void
+}
+
+const ProfileEditMode: React.FC<PropsType> = props => {
 
     return <div className={styles.descriptionBlock}>
         <img alt='Avatar' src={props.profile.photos.large || userPhoto}/>
@@ -43,21 +54,23 @@ let ProfileEditMode = props => {
 
         <ButtonUpdateAvatar updatePhoto={props.updatePhoto} isOwner={props.isOwner}/>
     </div>
+};
+
+type ButtonUpdateAvatarPropsType = {
+    updatePhoto: (file: any) => void
+    isOwner: boolean
 }
 
-export const ButtonUpdateAvatar = (props) => {
-    const onMainPhotoSelected = (e) => {
+export const ButtonUpdateAvatar: React.FC<ButtonUpdateAvatarPropsType> = (props) => {
+    const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
             props.updatePhoto(e.target.files[0])
         }
-    }
+    };
     return <>
         {props.isOwner && <div><input type='file' onChange={onMainPhotoSelected}/></div>}
     </>
-}
+};
 
-ProfileEditMode = reduxForm({
-    form: 'edit_profile',
-})(ProfileEditMode)
-
-export default ProfileEditMode
+// @ts-ignore
+export default reduxForm({form: 'edit_profile'})(ProfileEditMode)

@@ -1,29 +1,35 @@
-import React, {useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import styles from '../ProfileInfo.module.css'
 import Preloader from "../../../common/Preloader/Preloader";
 
-const ProfileStatusWithHooks = (props) => {
+type PropsType = {
+    status: string | null
+    updateUserStatus: (status: string | null) => void
+}
 
-    let [editMode, setEditMode] = useState(false)
-    let [status, setStatus] = useState(props.status)
+const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
 
-    let isPending = props.status !== status && editMode === false;
+    let [editMode, setEditMode] = useState(false);
+    let [status, setStatus] = useState(props.status);
+
+    let isPending = props.status !== status && !editMode;
 
     useEffect(() => {
         setStatus(props.status)
-    }, [props.status])
+    }, [props.status]);
 
     const activateMode = () => {
         setEditMode(true)
-    }
+    };
 
     const deactivateMode = () => {
-        setEditMode(false)
+        setEditMode(false);
         props.updateUserStatus(status);
-    }
-    const onStatusChange = (e) => {
+    };
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value);
-    }
+    };
+
 
     return <div className={styles.descriptionItem}>
         {isPending && <Preloader styles={styles.preloaderStatus}/>}
@@ -34,9 +40,10 @@ const ProfileStatusWithHooks = (props) => {
         }
         {editMode &&
         <div>
+            {/* @ts-ignore*/}
             <input onChange={onStatusChange} onBlur={deactivateMode} autoFocus={true} value={status}/>
         </div>}
     </div>
-}
+};
 
 export default ProfileStatusWithHooks
