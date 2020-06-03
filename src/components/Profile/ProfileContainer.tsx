@@ -2,7 +2,7 @@ import React from 'react'
 import Profile from './Profile'
 import {connect} from "react-redux";
 import {getUserProfile, getUserStatus, saveProfile, updatePhoto, updateUserStatus} from "../../redux/profile-reducer";
-import {withRouter} from "react-router-dom";
+import {withRouter, Redirect} from "react-router-dom";
 import {compose} from "redux";
 import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
@@ -16,6 +16,7 @@ type MapStatePropsType = {
     profile: ProfileType
     status: string | null
     authUserId: number | null
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUserProfile: (userId: number) => void
@@ -36,8 +37,10 @@ class ProfileContainer extends React.Component<PropsType> {
             userId = this.props.authUserId;
             if (!userId) this.props.history.push('/login')
         }
-        this.props.getUserProfile(userId);
-        this.props.getUserStatus(userId)
+        if (userId) {
+            this.props.getUserProfile(userId);
+            this.props.getUserStatus(userId)
+        }
     }
 
     componentDidMount() {
@@ -50,6 +53,8 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
+        if (!this.props.isAuth && !this.props.match.params.userId) return <Redirect to={'/login'}/>
+
         // eslint-disable-next-line no-lone-blocks
         {/*@ts-ignore*/}
         return <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
@@ -60,6 +65,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authUserId: state.auth.id,
+    isAuth: state.auth.isAuth,
 });
 
 export default compose(

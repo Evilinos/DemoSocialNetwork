@@ -5,6 +5,10 @@
     width: 1000px;
     height: 200px;
 }
+.wrapper img {
+    height: 300px;
+    width: 300px;
+}
 
 .descriptionBlock {
     padding: 10px;
