@@ -7,20 +7,20 @@ import {connect} from "react-redux";
 import {initializeApp, requestError} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
-const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
-const Login = React.lazy(() => import("./components/Login/Login"))
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const Login = React.lazy(() => import("./components/Login/Login"));
 
 class App extends React.Component {
     catchAllUnhandledErrors = (promiseRejectionEvent) => {
         if (promiseRejectionEvent.reason) {
             this.props.requestError(promiseRejectionEvent.reason.message)
         }
-    }
+    };
 
     componentDidMount() {
-        this.props.initializeApp()
+        this.props.initializeApp();
         window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
@@ -31,7 +31,7 @@ class App extends React.Component {
 
 
     render() {
-        if (!this.props.initialized) return <Preloader/>
+        if (!this.props.initialized) return <Preloader/>;
 
         return <div className={styles.appWrapper}>
             <HeaderContainer/>
@@ -53,6 +53,7 @@ class App extends React.Component {
                         <Route path='/login'
                                render={() => <Login/>}/>
                         <Redirect from="/" to="/profile" />
+                        <Redirect exact from="/DemoSocialNetwork/" to="/profile" /> {/* for deploy on gh-pages*/}
                         <Route render={() => <div>404 NOT FOUND</div>}/>
                     </Switch>
                 </Suspense>
@@ -64,6 +65,6 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
     error: state.app.error
-})
+});
 
 export default connect(mapStateToProps, ({initializeApp, requestError}))(App)

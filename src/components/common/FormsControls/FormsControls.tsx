@@ -9,14 +9,10 @@ type TextareaPropsType = {
 export const Textarea: React.FC<TextareaPropsType> = ({input, meta, ...props}) => {
 
     const hasError = meta.touched && meta.error;
-    return <>
-        <div className={styles.formControl + ' ' + (hasError ? styles.error : ' ')}>
-            <div>
+    return <div className={styles.formControl + ' ' + (hasError ? styles.error : ' ')}>
                 <textarea {...input} {...props}/>
-            </div>
-            {hasError && <span>{meta.error}</span>}
+                {hasError && <span>{meta.error}</span>}
         </div>
-    </>
 };
 
 type InputPropsType = {
@@ -27,12 +23,8 @@ type InputPropsType = {
 export const Input: React.FC<InputPropsType> = ({input, meta, ...props}) => {
 
     const hasError = meta.touched && meta.error;
-    return <>
-        <div className={styles.formControl + ' ' + (hasError ? styles.error : ' ')}>
-            <div>
-                <input {...input} {...props}/>
-            </div>
-            {hasError && <span>{meta.error}</span>}
-        </div>
-    </>
+    return <div className={styles.formControl + ' ' + (hasError ? styles.error : ' ')}>
+        <input {...input} {...props}/>
+        {hasError && <span>{meta.error}</span>}
+    </div>
 };

@@ -1,12 +1,26 @@
 .nav {
     grid-area: nav;
-    background-color: darksalmon;
     padding: 20px;
 }
+
 .item a {
-    color: white;
+    display: block;
     text-decoration: none;
+    border: 2px solid green;
+    margin-bottom: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    color: #006e00;
+    font-weight: 600;
+    transition: .2s;
 }
 .item a.active {
-    color: gold;
+    color: darkgoldenrod;
+}
+.item a:hover {
+    background-color: rgba(0, 128, 0, 0.11);
+    box-shadow: 0 0 6px rgba(0,0,0,0.5)
 }

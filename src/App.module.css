@@ -2,6 +2,8 @@
   margin: 0 auto;
   width: 1200px;
   display: grid;
+  background-color: aliceblue;
+
 
   grid-template-areas:
     "header header header"
@@ -14,7 +16,7 @@
 
 .appWrapperContent {
   grid-area: content;
-  background-color: cornflowerblue;
+  border-left: 1px solid rgba(0, 128, 0, 0.13);
 }
 
 .requestError {

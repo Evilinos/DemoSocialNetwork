@@ -2,13 +2,53 @@
     margin-bottom: 25px;
     margin-left: 25px;
     position: relative;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
 }
 .wrapper input {
     margin-bottom: 10px;
 }
 .wrapper button {
+    border: 2px solid green;
+    margin-bottom: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    color: #006e00;
+    transition: all .2s;
+    font-weight: 600;
     font-size: 16px;
 }
+.wrapper button:hover {
+    background-color: rgba(0, 128, 0, 0.11);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5)
+}
+
+.wrapper button:focus{
+    outline: none;
+    border: 2px solid deepskyblue;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)
+}
+
+
+.wrapper input {
+    -webkit-border-radius: 10px;
+    border: 2px solid rgba(0, 128, 0, 0.75);
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 16px;
+}
+.wrapper input:focus {
+    outline: none;
+}
+
+
+
 
 .preloader {
     width: 50px;

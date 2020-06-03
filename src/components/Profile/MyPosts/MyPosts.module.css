@@ -4,4 +4,44 @@
 
 .posts {
     margin-top: 10px;
+    color: black;
+}
+
+.postsBlock textarea {
+    font-size: 16px;
+    outline: none;
+    border: 1px solid rgba(0, 128, 0, 0.3);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 5px;
+    padding-left: 3px;
+    width: 300px;
+    height: 100px;
+}
+
+.postsBlock button  {
+    margin-right: 10px;
+    margin-top: 10px;
+    border: 2px solid green;
+    margin-bottom: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    color: #006e00;
+    transition: all .2s;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.postsBlock button:hover {
+    background-color: rgba(0, 128, 0, 0.11);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5)
+}
+
+.postsBlock button:focus{
+    outline: none;
+    border: 2px solid deepskyblue;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)
 }

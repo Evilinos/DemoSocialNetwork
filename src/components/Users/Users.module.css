@@ -29,9 +29,9 @@
     justify-items: center;
 }
 .userCard {
-    background-color: rgba(255, 255, 255, 0.65);
+    background-color: rgba(0, 233, 0, 0.04);
     padding: 10px;
-    border: 3px solid #2fb266;
+    border: 2px solid rgba(0, 128, 0, 0.2);
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
@@ -52,13 +52,30 @@
     font-weight: 300;
 }
 .button {
-    margin-top: 5px;
-    font-size: 18px;
+    border: 2px solid green;
+    margin-bottom: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    color: #006e00;
+    transition: all .2s;
     font-weight: 600;
-    border-width: 1px;
-    color: #fff;
-    background-color: #2fb266;
-    outline: none;
+    font-size: 16px;
     width: 100px;
     height: 30px;
+}
+.button:hover {
+    background-color: rgba(0, 128, 0, 0.11);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5)
+}
+
+.button:focus{
+    outline: none;
+    border: 2px solid deepskyblue;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)
+}
+.button[disabled] {
+    background-color: rgba(0, 0, 0, 0.25);
 }

@@ -34,12 +34,12 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
     return <div className={styles.descriptionItem}>
         {isPending && <Preloader styles={styles.preloaderStatus}/>}
         {!editMode &&
-        <div>
-            <span onDoubleClick={activateMode}>{props.status || '-----'}</span>
+        <div className={styles.status}>
+            <span onClick={activateMode}>{props.status || '-----'}</span>
         </div>
         }
         {editMode &&
-        <div>
+        <div className={styles.status}>
             {/* @ts-ignore*/}
             <input onChange={onStatusChange} onBlur={deactivateMode} autoFocus={true} value={status}/>
         </div>}

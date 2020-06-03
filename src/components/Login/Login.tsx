@@ -39,6 +39,9 @@ const Login: React.FC<PropsType> = (props) => {
 
     return <div className={styles.wrapper}>
         <h1>Login</h1>
+        <div style={{marginBottom: '15px'}}>Данные тестового аккаунта:<br/>
+            Email: free@samuraijs.com<br/>
+            Password: free</div>
         {/*@ts-ignore*/}
         <LoginForm isFetching={props.isFetching} captchaUrl={props.captchaUrl} onSubmit={onSubmit}/>
     </div>
