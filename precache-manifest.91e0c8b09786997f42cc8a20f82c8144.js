@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "afe8826724e1e58547aa8984b9ecf2be",
+    "revision": "e490e5ce3370b890df20cf30a0884478",
     "url": "/DemoSocialNetwork/index.html"
   },
   {
-    "revision": "b2d6e009e88cf2faf14a",
-    "url": "/DemoSocialNetwork/static/css/4.44606760.chunk.css"
+    "revision": "67762977d178e2421ac6",
+    "url": "/DemoSocialNetwork/static/css/4.7893eb8d.chunk.css"
   },
   {
     "revision": "2bcf96753ebbb4692a29",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/DemoSocialNetwork/static/css/7.b4cdb161.chunk.css"
   },
   {
-    "revision": "888f83863e5313994197",
-    "url": "/DemoSocialNetwork/static/css/main.f7983cbe.chunk.css"
+    "revision": "c094e78c6939bff388ff",
+    "url": "/DemoSocialNetwork/static/css/main.465fe478.chunk.css"
   },
   {
     "revision": "66bd420d20c7b740ec23",
@@ -36,8 +36,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/DemoSocialNetwork/static/js/3.f05cf310.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b2d6e009e88cf2faf14a",
-    "url": "/DemoSocialNetwork/static/js/4.f12208fc.chunk.js"
+    "revision": "67762977d178e2421ac6",
+    "url": "/DemoSocialNetwork/static/js/4.80313b29.chunk.js"
   },
   {
     "revision": "2bcf96753ebbb4692a29",
@@ -52,12 +52,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/DemoSocialNetwork/static/js/7.cb5fa08f.chunk.js"
   },
   {
-    "revision": "888f83863e5313994197",
+    "revision": "c094e78c6939bff388ff",
     "url": "/DemoSocialNetwork/static/js/main.b8dc31d5.chunk.js"
   },
   {
-    "revision": "52931c19e001681f89b2",
-    "url": "/DemoSocialNetwork/static/js/runtime-main.e3572dde.js"
+    "revision": "1417023d901acfa3d111",
+    "url": "/DemoSocialNetwork/static/js/runtime-main.9da99d13.js"
   },
   {
     "revision": "a158fb4a07718ad8d6c26be5d13c1a1d",
